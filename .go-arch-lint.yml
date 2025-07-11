@@ -1,0 +1,25 @@
+version: 3
+workdir: .
+components:
+  delivery:       { in: internal/delivery/** }
+  application:    { in: internal/application/** }
+  adapters:       { in: internal/adapters/** }
+  pkg:            { in: pkg/** }
+
+commonComponents:
+  - pkg
+
+deps:
+  adapters:
+    mayDependOn:
+      - application
+
+  application:
+    mayDependOn:
+      - application
+      - pkg
+
+  delivery:
+    mayDependOn:
+      - delivery
+      - application
